@@ -41,6 +41,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->delete('services/{id}', 'ServicesController@destroy');
 
 
+    $router->get('subscriptions', 'SubscriptionController@index');
     $router->post('subscriptions', 'SubscriptionController@initTransaction');
     $router->post('subscriptions/callback', 'SubscriptionController@callback');
 

@@ -18,7 +18,17 @@ class SubscriptionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['callback']]);
+        $this->middleware('auth'/*, ['except' => ['callback']]*/);
+    }
+
+    /**
+     * Get user subscribed plans
+     * @return mixed
+     */
+    public function index()
+    {
+        $subs = Subscription::where("user_id", Auth::user()->id)->get();
+        return response()->json($subs, 200);
     }
 
     /**

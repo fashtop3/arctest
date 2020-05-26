@@ -7,11 +7,14 @@ services:
     build: images/nginx
     command: nginx -g "daemon off;"
     links:
-      - server
+      - api
     ports:
       - "80:80"
     volumes:
       - ./images/php/app/public:/var/www/html/app/public
+    networks:
+      - frontend
+      - backend
 
   web:
     container_name: web
@@ -26,14 +29,14 @@ services:
       - REACT_APP_COOKIE_DOMAIN=${COOKIE_DOMAIN}
       - CHOKIDAR_USEPOLLING=true
     depends_on:
-      - server
+      - api
     networks:
       - frontend
     ports:
     - 8080:8080
 
-  server:
-    container_name: server
+  api:
+    container_name: api
     build:
       context: ./images/php
       dockerfile: Dockerfile
@@ -58,6 +61,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       MEMCACHED_HOST: cache
       CACHE_DRIVER: memcached
+      PAYSTACK_SEC: sk_test_9862a3685c5c294ccd02b6e992111db07d11c65c
+      PAYSTACK_PUB: pk_test_0a09df3fe5ff443ba716aa37b467cad66b576d6e
     networks:
       - backend
 

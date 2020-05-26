@@ -1,0 +1,37 @@
+# build environment
+FROM node:10.15.3-alpine as builder
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+ENV SHELL=/bin/sh
+COPY package.json /usr/src/app/package.json
+RUN npm install --silent
+
+#declare arguments
+ARG NODE_ENV
+ARG REACT_APP_SERVICE_URL
+ARG REACT_APP_COOKIE_DOMAIN
+ARG REACT_APP_ENV
+ARG PUBLIC_URL
+ARG REACT_APP_SSO_URL
+
+# expose environment to the new container
+ENV NODE_ENV $NODE_ENV
+ENV REACT_APP_COOKIE_DOMAIN $REACT_APP_COOKIE_DOMAIN
+ENV REACT_APP_SERVICE_URL $REACT_APP_SERVICE_URL
+ENV REACT_APP_ENV $REACT_APP_ENV
+ENV PUBLIC_URL $PUBLIC_URL
+ENV REACT_APP_SSO_URL $REACT_APP_SSO_URL
+
+COPY . /usr/src/app
+RUN npm run build
+
+# production environment
+FROM nginx:1.15.8-alpine
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]

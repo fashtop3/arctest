@@ -13,18 +13,17 @@ RUN set -xe \
     && rm -rf /tmp/* \
     && apk del .memcached-deps .phpize-deps
 
-WORKDIR /var/www/html/app
-
-COPY ./app .
+WORKDIR /app
 
 ENV COMPOSER_HOME /composer
-ENV PATH /var/www/html/app/vendor/bin:/composer/vendor/bin:$PATH
+ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+COPY app/ /app
+
 RUN composer install
-
 RUN chmod +x artisan
-
-CMD ["php-fpm", "-d /var/www/html/app/public"]
+CMD php artisan serve --host=0.0.0.0 --port=9000
+EXPOSE 9000

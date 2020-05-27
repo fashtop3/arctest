@@ -44,6 +44,11 @@ class ServicesController extends Controller
         return $this->fractal->createData($resource)->toArray();
     }
 
+    /**
+     * Return single service
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
         $Services = Service::find($id);
@@ -67,12 +72,21 @@ class ServicesController extends Controller
         return $this->fractal->createData($resource)->toArray();
     }
 
+    /**
+     * Service update
+     * @param $id
+     * @param Request $request
+     * @return mixed
+     */
     public function update($id, Request $request)
     {
 
         //validate request parameters
         $this->validate($request, [
-            'service_name' => 'max:255',
+            'service_name' => 'bail|required|max:255',
+            'price' => 'required|numeric',
+            'plan' => 'bail|required|max:255',
+            'service_description' => 'bail|required',
         ]);
 
         //Return error 404 response if Services was not found
@@ -90,6 +104,11 @@ class ServicesController extends Controller
         return $this->errorResponse('Failed to update Services!', 400);
     }
 
+    /**
+     * Deletes services
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
 

@@ -51,7 +51,7 @@ class SubscriptionController extends Controller
             'amount' => $service->price,
             'reference' => uniqid(),
             "plan" => $service->plan,
-            'callback_url' => "http://localhost:8080/?callback=true&service_id={$request->input('service_id')}"
+            'callback_url' => getenv('CALLBACK_URL')."?callback=true&service_id={$request->input('service_id')}"
         );
         $url = "https://api.paystack.co/transaction/initialize";
 

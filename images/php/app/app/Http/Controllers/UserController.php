@@ -56,6 +56,11 @@ class UserController extends Controller
 
     }
 
+    /**
+     * delete user
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
 

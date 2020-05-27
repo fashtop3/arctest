@@ -56,4 +56,19 @@ class UserController extends Controller
 
     }
 
+    public function destroy($id)
+    {
+
+        //Return error 404 response if Services was not found
+        if (!User::find($id)) return $this->errorResponse('User not found!', 404);
+
+        //Return 410(done) success response if delete was successful
+        if (User::find($id)->delete()) {
+            return $this->customResponse('User deleted successfully!', 204);
+        }
+
+        //Return error 400 response if delete was not successful
+        return $this->errorResponse('Failed to delete User!', 400);
+    }
+
 }

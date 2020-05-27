@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+
     // Matches "/api/register
     $router->post('register', 'AuthController@register');
 
@@ -29,6 +30,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // Matches "/api/users/1
     //get one user by id
     $router->get('users/{id}', 'UserController@singleUser');
+    $router->delete('users/{id}', 'UserController@destroy');
 
     // Matches "/api/users
     $router->get('users', 'UserController@allUsers');

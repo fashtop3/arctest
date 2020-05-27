@@ -16,8 +16,14 @@ class Controller extends BaseController
     {
         return response()->json([
             'token' => $token,
+            'data' => Auth::user(),
             'token_type' => 'bearer',
             'expires_in' => Auth::factory()->getTTL() * 60
         ], 200);
+    }
+
+    protected function customResponse($message = 'success', $status = 200)
+    {
+        return response(['status' => $status, 'message' => $message], $status);
     }
 }

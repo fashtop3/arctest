@@ -63,6 +63,7 @@ services:
       CACHE_DRIVER: memcached
       PAYSTACK_SEC: sk_test_9862a3685c5c294ccd02b6e992111db07d11c65c
       PAYSTACK_PUB: pk_test_0a09df3fe5ff443ba716aa37b467cad66b576d6e
+      CALLBACK_URL: http://localhost:8080/
     networks:
       - backend
 

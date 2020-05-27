@@ -51,7 +51,7 @@ class SubscriptionController extends Controller
             'amount' => $service->price,
             'reference' => uniqid(),
             "plan" => $service->plan,
-            'callback_url' => 'http://192.168.99.100/api/subscriptions/callback?service_id=2'
+            'callback_url' => "http://localhost:8080/?callback=true&service_id={$request->input('service_id')}"
         );
         $url = "https://api.paystack.co/transaction/initialize";
 
@@ -132,7 +132,9 @@ class SubscriptionController extends Controller
                 "price" => $tranx->data->amount
             ];
 
-            $subscription = Subscription::firstOrCreate($recur_sub);
+            $subscription = Subscription::firstOrCreate([
+                "user_id" => Auth::user()->id,
+                "service_id" => $request->get('service_id')], $recur_sub);
 
             return response()->json($subscription, 200);
         }

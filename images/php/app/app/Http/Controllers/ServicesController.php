@@ -98,15 +98,11 @@ class ServicesController extends Controller
 
         //Return 410(done) success response if delete was successful
         if (Service::find($id)->delete()) {
-            return $this->customResponse('Services deleted successfully!', 410);
+            return $this->customResponse('Services deleted successfully!', 204);
         }
 
         //Return error 400 response if delete was not successful
         return $this->errorResponse('Failed to delete Services!', 400);
     }
 
-    public function customResponse($message = 'success', $status = 200)
-    {
-        return response(['status' => $status, 'message' => $message], $status);
-    }
 }

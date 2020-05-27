@@ -26,5 +26,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install
 
 RUN chmod +x artisan
+RUN chmod 777 /var/www/html/app/storage/ -R
 
 CMD ["php-fpm", "-d /var/www/html/app/public"]

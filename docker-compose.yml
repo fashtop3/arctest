@@ -27,7 +27,7 @@ services:
     environment:
       - PUBLIC_URL=${DOMAIN}
       - CHOKIDAR_USEPOLLING=true
-      - VUE_APP_API_URL=$VUE_APP_API_URL
+      - VUE_APP_API_URL=${VUE_APP_API_URL}
     depends_on:
       - api
     networks:

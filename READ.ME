@@ -1,3 +1,7 @@
+when running in local development
+
+####confiugre CALLBACK_URL, VUE_APP_API_URL, APP_DEBUG respectively in the .env for docker-compose to identify local configuration
+
 dc up --build -d
 dc -f docker-compose.prod.yml up --build -d
 dc -f docker-compose.prod.yml exec api php artisan migrate

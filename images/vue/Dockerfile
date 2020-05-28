@@ -1,6 +1,7 @@
 # base image
-FROM node:10.15.3-alpine
+FROM node:10.20.1-alpine
 
+#RUN  npm i -D webpack
 # set working directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -9,10 +10,12 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 ENV SHELL=/bin/sh
 # install and cache app dependencies
+#COPY . .
 COPY package.json /usr/src/app/package.json
 
+RUN npm install copy-webpack-plugin --save-dev
 RUN npm install --silent
 
 
 # start app
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

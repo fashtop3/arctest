@@ -34,6 +34,8 @@ services:
       - frontend
     ports:
     - 8080:8080
+    - 8000:8080
+    - 8081:8081
 
   api:
     container_name: api

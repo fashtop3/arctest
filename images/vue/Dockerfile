@@ -13,9 +13,11 @@ ENV SHELL=/bin/sh
 #COPY . .
 COPY package.json /usr/src/app/package.json
 
-RUN npm install copy-webpack-plugin --save-dev
 RUN npm install --silent
 
 
 # start app
+EXPOSE 80
+EXPOSE 8080
+EXPOSE 8081
 CMD ["npm", "run", "start"]

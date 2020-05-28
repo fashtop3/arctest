@@ -29,7 +29,7 @@ export default {
         return {
             username: '',
             password: '',
-            submitted: false
+            submitted: false,
         }
     },
     computed: {

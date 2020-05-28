@@ -23,7 +23,9 @@ module.exports = {
         template: './public/index.html'
     })],
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        host: '0.0.0.0',
+        port: 8080
     },
     externals: {
         // global app config object

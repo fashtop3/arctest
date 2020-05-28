@@ -28,4 +28,5 @@ RUN composer install
 RUN chmod +x artisan
 RUN chmod 777 /var/www/html/app/storage/ -R
 
+EXPOSE 9000
 CMD ["php-fpm", "-d /var/www/html/app/public"]

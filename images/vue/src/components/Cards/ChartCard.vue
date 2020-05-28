@@ -85,6 +85,8 @@ export default {
   },
   mounted() {
     this.updateChartId();
+    // eslint-disable-next-line no-use-before-define
+    // eslint-disable-next-line
     import("chartist").then(Chartist => {
       let ChartistLib = Chartist.default || Chartist;
       this.$nextTick(() => {

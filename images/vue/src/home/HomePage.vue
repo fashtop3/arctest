@@ -9,10 +9,6 @@
             <ul v-if="users.items">
                 <li v-for="user in users.items" :key="user.id">
                     {{user.name}}
-                    <span v-if="user.deleting"><em> - Deleting...</em></span>
-                    <span v-else-if="user.deleteError" class="text-danger"> - ERROR: {{user.deleteError}}</span>
-                    <span v-if="account.user.data.id !== user.id"> - <a @click="deleteUser(user.id)"
-                                                                        class="text-danger">Delete</a></span>
                 </li>
             </ul>
         </div>
